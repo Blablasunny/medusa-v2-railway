@@ -85,4 +85,10 @@ module.exports = defineConfig({
     backendUrl: process.env.MEDUSA_BACKEND_URL || undefined,
   },
   modules: redisModules,
+  plugins: [
+  {
+    resolve: "@rsc-labs/medusa-store-analytics-v2",
+    options: {},
+  },
+],
 })

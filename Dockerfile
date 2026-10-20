@@ -1,5 +1,6 @@
 # --- Build stage: full toolchain, compiles backend + admin -------------------
 FROM node:22-alpine AS build
+ENV NPM_CONFIG_LEGACY_PEER_DEPS=true
 WORKDIR /app
 # libc6-compat: glibc compatibility for native build tooling (swc/esbuild) on musl
 RUN apk add --no-cache libc6-compat
@@ -15,6 +16,7 @@ RUN npm run build
 
 # --- Runtime stage: production output only -----------------------------------
 FROM node:22-alpine AS runtime
+ENV NPM_CONFIG_LEGACY_PEER_DEPS=true
 WORKDIR /app
 ENV NODE_ENV=production \
     PORT=9000
